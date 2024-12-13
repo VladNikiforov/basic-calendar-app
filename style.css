@@ -1,0 +1,233 @@
+body {
+    font-family: "Comic Sans MS", cursive;
+    background-color: #272727;
+    color: #e9dada;
+    justify-content: center;
+    text-align: center;
+    user-select: none;
+}
+
+#allCalendars {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    margin-bottom: 10px;
+}
+
+.Calendars {
+    width: 250px;
+    margin: 0 auto;
+    padding: 15px;
+    border: 1px solid #e9dada;
+    border-radius: 15px;
+    margin-bottom: 10px;
+}
+
+.Months {
+    margin-top: -5px;
+    font-size: 20px;
+    width: 200px;
+    text-align: center;
+    margin-bottom: 5px;
+    margin-left: 25px;
+}
+
+.separater {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.weekDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    width: 240px;
+    padding: 10px;
+    border-bottom: 1px solid #e9dada;
+    margin-bottom: 10px;
+    margin-left: -5px;
+    font-size: 10px;
+}
+
+button {
+    height: 30px;
+    border-radius: 5px;
+    border: none;
+    background-color: #007bff;
+    color: #fff;
+    cursor: pointer;
+    margin-bottom: 10px;
+    width: 100px;
+}
+
+.monthDays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    justify-content: space-between;
+    margin-right: 15px;
+}
+
+.dayDates {
+    margin: -2px;
+    border: 1px;
+    border-radius: 10px;
+    height: 35px;
+    width: 35px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #e9dada;
+}
+
+.Saturday,
+.Sunday {
+    color: #ff6347;
+}
+
+#September-15-2023 {
+    background-color: #f5a607;
+    color: #fff;
+}
+
+#submitDate,
+#cancelBtn {
+    width: 50px;
+}
+
+#clickedOnDay {
+    width: 300px;
+    margin: auto;
+    border: 1px solid #e9dada;
+    border-radius: 5px;
+    display: none;
+}
+
+#clickedDate {
+    margin-top: 10px;
+}
+
+#eventName {
+    width: 110px;
+    margin-right: 43px;
+    margin-bottom: 10px;
+    padding: 3px;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#backgroundColor {
+    background-color: #007bff;
+    color: white;
+    padding: 3px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 120px;
+}
+
+#clock {
+    font-size: 30px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.topDisplay {
+    text-align: center;
+    padding: 10px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+#title {
+    margin: 0;
+    flex: 1;
+    margin-right: 40px;
+}
+
+#settingsDark,
+#settingsLight {
+    width: 30px;
+    height: 30px;
+    order: -1;
+}
+
+#settingsBox {
+    position: absolute;
+    width: 200px;
+    height: 75px;
+    border: 1px solid #e9dada;
+    padding: 15px;
+    border-radius: 5px;
+}
+
+#settingsColor {
+    background-color: black;
+    color: white;
+    padding: 3px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    width: 100px;
+    border: 1px solid;
+}
+
+#dayDifferenceBox {
+    display: block;
+    border: 1px solid #e9dada;
+    border-radius: 5px;
+    width: 350px;
+    height: 170px;
+    margin: 0 auto;
+    margin-top: 10px;
+    margin-bottom: 15px;
+}
+
+#date1,
+#date2 {
+    width: 140px;
+    padding: 3px;
+    font-size: 14px;
+    border: 1px solid black;
+    border-radius: 5px;
+}
+
+#settingsCloseBtn {
+    margin-top: 10px;
+}
+
+#dayDifferenceBtn {
+    margin-top: 10px;
+}
+
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #808080;
+    border-radius: 6px;
+}
+
+.zoom-in {
+    width: 500px;
+    margin-left: 400px;
+    margin-top: 100px;
+    margin-bottom: 100px;
+    transform: translate(0, 0) scale(1.5);
+
+    .weekDays {
+        justify-content: space-between;
+        width: auto;
+    }
+
+    .monthDays {
+        margin: auto;
+        margin-left: 20px;
+        margin-right: -10px;
+        font-size: 15px;
+    }
+}
