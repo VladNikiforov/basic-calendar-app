@@ -1,41 +1,41 @@
 <!DOCTYPE html>
 <html lang="en">
-
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
     <title>Calendar App</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="style.css" />
     <script defer src="script.js"></script>
-</head>
+  </head>
 
-<body>
+  <body>
     <div class="topDisplay">
-        <h1 id="title">Calendar App</h1>
-        <img src="assets/settingsLight.png" id="settingsLight">
-        <img src="assets/settingsDark.png" id="settingsDark">
-    </div>
+      <h1 id="title">Calendar App</h1>
 
-    <div id="clock"></div>
+      <div class="rightSection">
+        <div id="clock"></div>
+
+        <img src="assets/settingsLight.png" id="settingsIcon" />
+      </div>
+    </div>
 
     <button id="prevYear">Y-</button>
     <button id="nextYear">Y+</button>
 
     <button id="back">back</button>
-    
+
     <button id="prevMonth">M-</button>
     <button id="nextMonth">M+</button>
 
-
     <div id="settingsBox">
-        <label>Theme:</label>
-        <select id="settingsColor">
-            <option value="black" selected>Dark Mode</option>
-            <option value="white">Light Mode</option>
-        </select><br>
-        <button id="settingsCloseBtn">close</button>
+      <label>Theme:</label>
+      <select id="settingsColor">
+        <option value="black" selected>Dark Mode</option>
+        <option value="white">Light Mode</option></select
+      ><br />
+      <button id="settingsCloseBtn">close</button>
     </div>
 
     <div class="Monday"></div>
@@ -56,38 +56,37 @@
     <div id="allCalendars"></div>
 
     <div id="dayDifferenceBox">
-        <label>Day Difference</label><br>
-        <label>Date 1:</label>
-        <input type="date" id="date1"><br>
-        <label>Date 2:</label>
-        <input type="date" id="date2"><br>
-        <button id="dayDifferenceBtn">calculate</button><br>
-        <label id="dayDifference"></label>
+      <label>Day Difference</label><br />
+      <label>Date 1:</label>
+      <input type="date" id="date1" /><br />
+      <label>Date 2:</label>
+      <input type="date" id="date2" /><br />
+      <button id="dayDifferenceBtn">calculate</button><br />
+      <label id="dayDifference"></label>
     </div>
-    
+
     <div id="clickedOnDay">
-        <div id="clickedDate"></div>
-        <div id="eventNameContainer"></div><br>
+      <div id="clickedDate"></div>
+      <div id="eventNameContainer"></div>
+      <br />
 
-        <button id="createEvent">Create Event</button><br>
+      <button id="createEvent">Create Event</button><br />
 
-        <label class="eventText">Create Event:</label><br>
-        <label class="eventText">Color:</label>
-        <select id="backgroundColor">
-            <option value="#71a1f0" selected>Sky Blue</option>
-            <option value="#39bd3b">Grassy Green</option>
-            <option value="#f5cd07">Sunny Yellow</option>
-            <option value="#eb4646">Red</option>
-            <option value="#f5a607">Orange</option>
-        </select><br>
+      <label class="eventText">Create Event:</label><br />
+      <label class="eventText">Color:</label>
+      <select id="backgroundColor">
+        <option value="#71a1f0" selected>Blue</option>
+        <option value="#39bd3b">Green</option>
+        <option value="#f5cd07">Yellow</option>
+        <option value="#eb4646">Red</option>
+        <option value="#f5a607">Orange</option></select
+      ><br />
 
-        <label class="eventText">Event Title:</label>
-        <input type="text" id="eventName" placeholder="Event"><br>
+      <label class="eventText">Event Title:</label>
+      <input type="text" id="eventName" placeholder="Event" /><br />
 
-        <button id="submitDate">submit</button>
-        <button id="cancelBtn">cancel</button>
+      <button id="submitDate">submit</button>
+      <button id="cancelBtn">cancel</button>
     </div>
-    
-</body>
-
+  </body>
 </html>
