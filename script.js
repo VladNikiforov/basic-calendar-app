@@ -128,8 +128,9 @@ if (currentMonth > 11) {
 }
 
 //Date Names
-weekdayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
-monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
+const weekdayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+const days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
+const monthName = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December']
 
 //Event Storage
 let storeEvents = []
@@ -240,29 +241,58 @@ function renderDays() {
   }
 }
 
-function renderFullMonth() {
+let calendars, separater, months, weekDays, monthDays, weekday, day
+
+function renderLogic() {
   calcMonthDays()
 
-  let calendars = document.createElement('div')
+  calendars = document.createElement('div')
   calendars.id = `Calendar${monthName[currentMonth]}`
   calendars.classList.add('Calendars')
   allCalendars.appendChild(calendars)
 
-  let separater = document.createElement('div')
+  separater = document.createElement('div')
   separater.id = `separater${monthName[currentMonth]}`
   separater.classList.add('separater')
   calendars.appendChild(separater)
 
-  let months = document.createElement('div')
+  months = document.createElement('div')
   months.id = `Month${currentMonth}`
   months.classList.add('Months')
   months.textContent = monthName[currentMonth]
   separater.appendChild(months)
 
-  let clickedMonth = document.getElementById(`Calendar${months.textContent}`)
+  weekDays = document.createElement('div')
+  weekDays.classList.add('weekDays')
+  weekDays.classList.add(`weekDays${monthName[currentMonth]}`)
+  calendars.appendChild(weekDays)
+
+  days.forEach((element) => {
+    day = document.createElement('div')
+    day.classList.add('day')
+    day.textContent = element
+    weekDays.appendChild(day)
+  })
+
+  weekdayName.forEach((element) => {
+    weekday = document.createElement('div')
+    weekday.classList.add(`${element}${monthName[currentMonth]}`)
+    calendars.appendChild(weekday)
+  })
+
+  monthDays = document.createElement('div')
+  monthDays.classList.add(`monthDays`)
+  monthDays.classList.add(`monthDays${monthName[currentMonth]}`)
+  calendars.appendChild(monthDays)
+}
+
+function renderFullMonth() {
+  renderLogic()
+
+  const clickedMonth = document.getElementById(`Calendar${months.textContent}`)
   clickedMonth.classList.add('zoom-in')
-  let splirMonth = months.id.split('Month')
-  currentMonth = splirMonth[1]
+
+  currentMonth = months.id.split('Month')[1]
 
   months.addEventListener('click', () => {
     monthName.forEach((deleteMonth) => {
@@ -272,61 +302,19 @@ function renderFullMonth() {
     })
   })
 
-  let weekDays = document.createElement('div')
-  weekDays.classList.add('weekDays')
-  weekDays.classList.add(`weekDays${monthName[currentMonth]}`)
-  calendars.appendChild(weekDays)
-
-  let days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-
-  days.forEach((element) => {
-    let day = document.createElement('div')
-    day.classList.add('day')
-    day.textContent = element
-    weekDays.appendChild(day)
-  })
-
-  weekdayName.forEach((element) => {
-    let weekday = document.createElement('div')
-    weekday.classList.add(`${element}${monthName[currentMonth]}`)
-    calendars.appendChild(weekday)
-  })
-
-  let monthDays = document.createElement('div')
-  monthDays.classList.add(`monthDays`)
-  monthDays.classList.add(`monthDays${monthName[currentMonth]}`)
-  calendars.appendChild(monthDays)
-
   renderGaps()
-
   renderDays()
 }
 
 function renderFullYear() {
   for (currentMonth = 0; currentMonth < 12; currentMonth++) {
-    calcMonthDays()
-
-    let calendars = document.createElement('div')
-    calendars.id = `Calendar${monthName[currentMonth]}`
-    calendars.classList.add('Calendars')
-    allCalendars.appendChild(calendars)
-
-    let separater = document.createElement('div')
-    separater.id = `separater${monthName[currentMonth]}`
-    separater.classList.add('separater')
-    calendars.appendChild(separater)
-
-    let months = document.createElement('div')
-    months.id = `Month${currentMonth}`
-    months.classList.add('Months')
-    months.textContent = monthName[currentMonth]
-    separater.appendChild(months)
+    renderLogic()
 
     months.addEventListener('click', () => {
-      let clickedMonth = document.getElementById(`Calendar${months.textContent}`)
+      const clickedMonth = document.getElementById(`Calendar${months.textContent}`)
       clickedMonth.classList.add('zoom-in')
-      let splirMonth = months.id.split('Month')
-      currentMonth = splirMonth[1]
+
+      currentMonth = months.id.split('Month')[1]
 
       monthName.forEach((deleteMonth) => {
         if (months.textContent != deleteMonth) {
@@ -335,33 +323,7 @@ function renderFullYear() {
       })
     })
 
-    let weekDays = document.createElement('div')
-    weekDays.classList.add('weekDays')
-    weekDays.classList.add(`weekDays${monthName[currentMonth]}`)
-    calendars.appendChild(weekDays)
-
-    let days = ['MON', 'TUE', 'WED', 'THU', 'FRI', 'SAT', 'SUN']
-
-    days.forEach((element) => {
-      let day = document.createElement('div')
-      day.classList.add('day')
-      day.textContent = element
-      weekDays.appendChild(day)
-    })
-
-    weekdayName.forEach((element) => {
-      let weekday = document.createElement('div')
-      weekday.classList.add(`${element}${monthName[currentMonth]}`)
-      calendars.appendChild(weekday)
-    })
-
-    let monthDays = document.createElement('div')
-    monthDays.classList.add(`monthDays`)
-    monthDays.classList.add(`monthDays${monthName[currentMonth]}`)
-    calendars.appendChild(monthDays)
-
     renderGaps()
-
     renderDays()
   }
 }
@@ -377,9 +339,7 @@ function eventsInfo() {
   })
 }
 
-_prevYear.addEventListener('click', () => {
-  currentYear--
-
+function renderYearLogic() {
   calcMonthDays()
   clearDays()
   renderFullYear()
@@ -387,42 +347,25 @@ _prevYear.addEventListener('click', () => {
   today()
 
   eventsInfo()
+}
+
+_prevYear.addEventListener('click', () => {
+  currentYear--
+  renderYearLogic()
 })
 
 _nextYear.addEventListener('click', () => {
   currentYear++
-
-  calcMonthDays()
-  clearDays()
-  renderFullYear()
-  displayYear.innerText = currentYear
-  today()
-
-  eventsInfo()
+  renderYearLogic()
 })
 
-_prevMonth.addEventListener('click', () => {
-  currentMonth--
-
+function renderMonthLogic() {
   clearDays()
 
   if (currentMonth < 0) {
     currentMonth = 11
     currentYear--
   }
-
-  renderFullMonth()
-  displayYear.innerText = currentYear
-  today()
-
-  eventsInfo()
-})
-
-const _nextMonth = document.getElementById('nextMonth')
-_nextMonth.addEventListener('click', () => {
-  currentMonth++
-
-  clearDays()
 
   if (currentMonth > 11) {
     currentMonth = 0
@@ -434,6 +377,17 @@ _nextMonth.addEventListener('click', () => {
   today()
 
   eventsInfo()
+}
+
+_prevMonth.addEventListener('click', () => {
+  currentMonth--
+  renderMonthLogic()
+})
+
+const _nextMonth = document.getElementById('nextMonth')
+_nextMonth.addEventListener('click', () => {
+  currentMonth++
+  renderMonthLogic()
 })
 
 //Other Functions
@@ -458,21 +412,24 @@ const _back = document.getElementById('back')
 _back.addEventListener('click', () => {
   clearDays()
 
-  currentMonth--
+  if (_back.value == 'month') {
+    currentMonth--
 
-  if (currentMonth < 0) {
-    currentMonth = 11
-    currentYear--
+    if (currentMonth < 0) {
+      currentMonth = 11
+      currentYear--
+    }
+
+    if (currentMonth > 11) {
+      currentMonth = 0
+      currentYear++
+    }
+
+    renderFullMonth()
+  } else {
+    renderFullYear()
   }
 
-  if (currentMonth > 11) {
-    currentMonth = 0
-    currentYear++
-  }
-
-  renderFullMonth()
-
-  //renderFullYear()
   displayYear.innerText = currentYear
   today()
 })
