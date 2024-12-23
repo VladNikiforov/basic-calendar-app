@@ -11,8 +11,8 @@ let newEvent
 const _clickedOnDay = document.getElementById('clickedOnDay')
 const _submitDate = document.getElementById('submitDate')
 const _cancelBtn = document.getElementById('cancelBtn')
-const _nextYear = document.getElementById('nextYear')
-const _prevYear = document.getElementById('prevYear')
+const _nextBtn = document.getElementById('nextBtn')
+const _prevBtn = document.getElementById('prevBtn')
 const _clickedDate = document.getElementById('clickedDate')
 const _backgroundColor = document.getElementById('backgroundColor')
 const _eventName = document.getElementById('eventName')
@@ -28,6 +28,7 @@ const displayYear = document.getElementById('displayYear')
 const loopDayDates = document.getElementsByClassName('dayDates')
 const dayDifferenceBtn = document.getElementById('dayDifferenceBtn')
 const _title = document.getElementById('title')
+const _renderType = document.getElementById('renderType')
 
 const colorDark = '#272727'
 const colorLight = '#e9dada'
@@ -349,14 +350,24 @@ function renderYearLogic() {
   eventsInfo()
 }
 
-_prevYear.addEventListener('click', () => {
-  currentYear--
-  renderYearLogic()
+_prevBtn.addEventListener('click', () => {
+  if (_renderType.value == 'year') {
+    currentYear--
+    renderYearLogic()
+  } else {
+    currentMonth--
+    renderMonthLogic()
+  }
 })
 
-_nextYear.addEventListener('click', () => {
-  currentYear++
-  renderYearLogic()
+_nextBtn.addEventListener('click', () => {
+  if (_renderType.value == 'year') {
+    currentYear++
+    renderYearLogic()
+  } else {
+    currentMonth++
+    renderMonthLogic()
+  }
 })
 
 function renderMonthLogic() {
@@ -379,17 +390,6 @@ function renderMonthLogic() {
   eventsInfo()
 }
 
-_prevMonth.addEventListener('click', () => {
-  currentMonth--
-  renderMonthLogic()
-})
-
-const _nextMonth = document.getElementById('nextMonth')
-_nextMonth.addEventListener('click', () => {
-  currentMonth++
-  renderMonthLogic()
-})
-
 //Other Functions
 let todayMonth = dateRender.getMonth()
 let todayYear = dateRender.getFullYear()
@@ -408,11 +408,10 @@ function clearDays() {
   monthDaysContainer.innerHTML = ''
 }
 
-const _back = document.getElementById('back')
-_back.addEventListener('click', () => {
+_renderType.addEventListener('change', () => {
   clearDays()
 
-  if (_back.value == 'month') {
+  if (_renderType.value == 'month') {
     currentMonth--
 
     if (currentMonth < 0) {
@@ -489,7 +488,7 @@ function changeTitleColor() {
   titleColor++
 }
 
-intervalId = setInterval(changeTitleColor, 20)
+intervalId = null
 _title.addEventListener('click', () => {
   if (intervalId) {
     clearInterval(intervalId)

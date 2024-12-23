@@ -12,25 +12,25 @@
 
   <body>
     <div class="topDisplay">
-      <h1 id="title">Calendar App</h1>
+      <div class="leftSection">
+        <h1 id="title">Calendar App</h1>
+
+        <button id="prevBtn"><</button>
+        <button id="nextBtn">></button>
+        <h1 id="displayYear"></h1>
+      </div>
 
       <div class="rightSection">
         <div id="clock"></div>
 
+        <select id="renderType">
+          <option value="month">Month</option>
+          <option value="year" selected>Year</option>
+        </select>
+
         <img src="assets/settingsLight.png" id="settingsIcon" />
       </div>
     </div>
-
-    <button id="prevYear">Y-</button>
-    <button id="nextYear">Y+</button>
-
-    <select id="back">
-      <option>month</option>
-      <option>year</option>
-    </select>
-
-    <button id="prevMonth">M-</button>
-    <button id="nextMonth">M+</button>
 
     <div id="settingsBox">
       <label>Theme:</label>
@@ -53,8 +53,6 @@
     <div class="weekends"></div>
 
     <div class="monthDays"></div>
-
-    <h1 id="displayYear"></h1>
 
     <div id="allCalendars"></div>
 
