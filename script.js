@@ -1,11 +1,12 @@
+import * as Cookies from './scripts/cookies.js'
+
 let dateRender = new Date()
 
 let currentYear = dateRender.getFullYear()
 let currentMonth = dateRender.getMonth()
 let currentDate = dateRender.getDate()
 
-let lastClick
-let newEvent
+let lastClick, newEvent
 
 //HTML Elements
 const _clickedOnDay = document.getElementById('clickedOnDay')
@@ -123,10 +124,18 @@ function calcMonthDays() {
 }
 calcMonthDays()
 
-if (currentMonth > 11) {
-  currentMonth = 0
-  currentYear++
+function monthBorders() {
+  if (currentMonth < 0) {
+    currentMonth = 11
+    currentYear--
+  }
+
+  if (currentMonth > 11) {
+    currentMonth = 0
+    currentYear++
+  }
 }
+monthBorders()
 
 //Date Names
 const weekdayName = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
@@ -145,8 +154,6 @@ class eventOject {
     this.year = year
   }
 }
-
-const _prevMonth = document.getElementById('prevMonth')
 
 //Event Buttons
 _createEvent.addEventListener('click', () => {
@@ -372,21 +379,10 @@ _nextBtn.addEventListener('click', () => {
 
 function renderMonthLogic() {
   clearDays()
-
-  if (currentMonth < 0) {
-    currentMonth = 11
-    currentYear--
-  }
-
-  if (currentMonth > 11) {
-    currentMonth = 0
-    currentYear++
-  }
-
+  monthBorders()
   renderFullMonth()
   displayYear.innerText = currentYear
   today()
-
   eventsInfo()
 }
 
@@ -398,7 +394,7 @@ function today() {
   let currentDateStyle = document.getElementById(`${monthName[todayMonth]}-${currentDate}-${todayYear}`)
   if (currentDateStyle) {
     currentDateStyle.style.backgroundColor = '#00a2ff'
-    currentDateStyle.style.color = 'white'
+    currentDateStyle.style.color = '#fff'
   }
 }
 today()
@@ -414,15 +410,7 @@ _renderType.addEventListener('change', () => {
   if (_renderType.value == 'month') {
     currentMonth--
 
-    if (currentMonth < 0) {
-      currentMonth = 11
-      currentYear--
-    }
-
-    if (currentMonth > 11) {
-      currentMonth = 0
-      currentYear++
-    }
+    monthBorders()
 
     renderFullMonth()
   } else {
@@ -432,33 +420,6 @@ _renderType.addEventListener('change', () => {
   displayYear.innerText = currentYear
   today()
 })
-
-//Cookies
-function setCookie(name, value, daysToLive) {
-  const date = new Date()
-  date.setTime(date.getTime() + daysToLive * 24 * 60 * 60 * 1000)
-  let expires = 'expires=' + date.toUTCString()
-  document.cookie = `${name}=${value}; ${expires}; path=/`
-}
-
-function deleteCookie(name) {
-  setCookie(name, null, null)
-}
-
-function getCookie(name) {
-  const cDecoded = decodeURIComponent(document.cookie)
-  const cArray = cDecoded.split('; ')
-
-  let result = null
-
-  cArray.forEach((element) => {
-    if (element.indexOf(name) == 0) {
-      result = element.substring(name.length + 1)
-    }
-  })
-  result = result.split(', 365').toString()
-  return result.slice(0, -1).toString()
-}
 
 displayYear.innerText = currentYear
 
@@ -478,7 +439,7 @@ let type = ''
 const secretType = 'colorful'
 document.addEventListener('keydown', (event) => {
   type += event.key
-  if (type === secretType) return setInterval(changeColor, 25)
+  if (type == secretType) return setInterval(changeColor, 25)
 })
 
 //Secret - Title
@@ -488,7 +449,7 @@ function changeTitleColor() {
   titleColor++
 }
 
-intervalId = null
+let intervalId = null
 _title.addEventListener('click', () => {
   if (intervalId) {
     clearInterval(intervalId)
