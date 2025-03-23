@@ -1,2 +1,1 @@
-# basic-calendar-app
-A basic calendar app
+# Basic Calendar App
