@@ -1,5 +1,3 @@
-import * as Cookies from './scripts/cookies.js'
-
 let dateRender = new Date()
 
 let currentYear = dateRender.getFullYear()
